@@ -15,8 +15,12 @@ export class UpdateAccount extends Component {
         user: "",
         lastRent: "2010-01-01",
         countRent: 0,
-        price: ""
+        price: "",
+        loginEmail: "",
+        password: "",
     };
+    this.changeLoginEmail = this.changeLoginEmail.bind(this);
+    this.changePassword = this.changePassword.bind(this);
     this.changeTypeId = this.changeTypeId.bind(this);
     this.changeTypeStateId = this.changeTypeStateId.bind(this);
     this.changeUser = this.changeUser.bind(this);
@@ -53,6 +57,9 @@ export class UpdateAccount extends Component {
     let price = this.state.accounts.price;
     let idType = this.state.accounts.typeId;
     let idState = this.state.accounts.idState;
+    let pass = this.state.accounts.password;
+    let email = this.state.accounts.loginEmail;
+
     e.preventDefault();
     if(this.state.stateId === "2"){
         increment = this.state.accounts.countRent + 1;
@@ -69,13 +76,19 @@ export class UpdateAccount extends Component {
     
     if(this.state.idState !== 0){idState = this.state.stateId;}
 
+    if(this.state.password !== ""){pass = this.state.password}
+
+    if(this.state.loginEmail !== ""){email = this.state.loginEmail}
+
     let account = { typeId: idType, 
                     dateBorn: this.state.accounts.dateBorn, 
                     stateId: idState,
                     user: usuario,
                     lastRent: fechaHoy,
                     countRent: increment,
-                    price: price};
+                    price: price,
+                    password: pass,
+                    loginEmail: email};
     AccountService.updateAccount(localStorage.getItem("id"), account);
     console.log(account);
     window.location.href = '/';
@@ -84,6 +97,15 @@ export class UpdateAccount extends Component {
 /*   changeLastRent=(e) =>{
     this.setState({lastRent: e.targe.value})
   } */
+
+  changeLoginEmail=(e) =>{
+    this.setState({loginEmail: e.target.value})
+  }
+
+  changePassword=(e) => {
+    this.setState({password: e.target.value})
+  }
+
 
   changeUser=(e) => {
     this.setState({user: e.target.value})
@@ -138,6 +160,16 @@ export class UpdateAccount extends Component {
                     <label> Ultima fecha de renta </label>
                     <input  type ="date" name="lastRent" className="form-control" value={this.state.lastRent} onChange={this.changeLastRent} required/>
                   </div> */}
+
+                  <div className="form-group">
+                    <label> Correo de la cuenta:  </label>
+                    <input placeholder="Introduzca Correo" type ="email" name="email" className="form-control" value={this.state.loginEmail} onChange={this.changeLoginEmail} required/>
+                  </div>
+
+                  <div className="form-group">
+                    <label> Contraseña:  </label>
+                    <input placeholder="**************" type ="password" name="password" className="form-control" value={this.state.password} onChange={this.changePassword} required/>
+                  </div>
 
                   <div className="form-group">
                     <label> Precio del arriendo </label>

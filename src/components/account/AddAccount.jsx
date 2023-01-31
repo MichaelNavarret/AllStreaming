@@ -11,12 +11,15 @@ export class AddAccount extends Component {
         typeId: 2,
         dateBorn: "",
         stateId: 1,
-        user: "USER_EMPTY",
-        lastRent: "2010-01-01",
+        user: "",
+        lastRent: "",
         countRent: 0,
         price: 0,
+        loginEmail: "",
+        password: "",
     };
-    this.changeDateBron = this.changeDateBron.bind(this);
+    this.changeLoginEmail = this.changeLoginEmail.bind(this);
+    this.changePassword = this.changePassword.bind(this);
     this.changePrice = this.changePrice.bind(this);
     this.saveAccount = this.saveAccount.bind(this);
   }
@@ -30,26 +33,45 @@ export class AddAccount extends Component {
   }
   
   saveAccount = (e) => {
+    var today = new Date();
+    var day = today.getDate();
+    if(day > 0 && day < 10){
+        day="0"+day;
+    }
+    var month = today.getMonth() + 1;
+    
+    if(month>0 && month < 10){
+        month = "0"+month;
+    }
+    var year = today.getFullYear();
+    let formatFecha = (`${year}-${month}-${day}`);
+
     e.preventDefault();
     let account = { typeId: this.state.typeId, 
-                    dateBorn: this.state.dateBorn, 
+                    dateBorn: formatFecha, 
                     stateId: this.state.stateId,
                     user: this.state.user,
                     lastRent: this.state.lastRent,
                     countRent: this.state.countRent,
-                    price: this.state.price,};
+                    price: this.state.price,
+                    loginEmail: this.state.loginEmail,
+                    password: this.state.password};
     AccountService.addAccount(account);
     window.location.href = '/'; 
     
 
   }
 
-  changeTypeId=(e) => {
-    this.setState({typeId: e.target.value})
+  changeLoginEmail=(e) =>{
+    this.setState({loginEmail: e.target.value})
   }
 
-  changeDateBron=(e) => {
-    this.setState({dateBorn: e.target.value})
+  changePassword=(e) => {
+    this.setState({password: e.target.value})
+  }
+
+  changeTypeId=(e) => {
+    this.setState({typeId: e.target.value})
   }
 
   changePrice=(e) => {
@@ -62,7 +84,7 @@ export class AddAccount extends Component {
     return (
       <div>
         <div className="container">
-          <div className="row ">
+          <div className="m-4">
             <div className="card col-md-6 offset-md-3 offset-md-3">
               <h1 className="text-center">Crear Cuenta</h1>
               <div className="card-body">
@@ -75,10 +97,15 @@ export class AddAccount extends Component {
                         <ListTypeAccounts />
                     </select>
                   </div>
-                  
+
                   <div className="form-group">
-                    <label> Fecha de Creacion: </label>
-                    <input placeholder="Fecha de Creacion" type ="date" name="dateBorn" className="form-control" value={this.state.dateBorn} onChange={this.changeDateBron} required/>
+                    <label> Correo de la cuenta:  </label>
+                    <input placeholder="Introduzca Correo" type ="email" name="email" className="form-control" value={this.state.loginEmail} onChange={this.changeLoginEmail} required/>
+                  </div>
+
+                  <div className="form-group">
+                    <label> Contraseña:  </label>
+                    <input placeholder="**************" type ="password" name="password" className="form-control" value={this.state.password} onChange={this.changePassword} required/>
                   </div>
 
                   <div className="form-group">
