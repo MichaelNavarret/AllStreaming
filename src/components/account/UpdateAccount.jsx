@@ -94,10 +94,9 @@ export class UpdateAccount extends Component {
                     price: price,
                     password: pass,
                     loginEmail: email};
-    
-    console.log(account);
     AccountService.updateAccount(localStorage.getItem("id"), account);   
-    /*window.location.href = '/';  */
+    alert("Datos Actualizados");
+    window.location.href = '/';
   }
 
 /*   changeLastRent=(e) =>{

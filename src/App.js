@@ -11,7 +11,7 @@ function App() {
     <div>
       <Router>
         <HeaderComponent />
-        <div className="container">
+        <div className="container-fluid">
           <Routes>
             <Route path="/" exact element={<ListAccounts/>}></Route>
             <Route path="/create-account" exact element={<AddAccount />}></Route>

@@ -23,6 +23,7 @@ export class AddTypeAccount extends Component {
     e.preventDefault();
     let type = { name: this.state.name};
     TypeAccountService.addType(type);
+    alert("Nuevo servicio " + this.state.name  + " ingresado")
     window.location.href = '/'; 
   }
 
@@ -43,9 +44,9 @@ export class AddTypeAccount extends Component {
                     <input placeholder="Ejemplo: Netflix, HbO, etc."  type ="text" name="name" className="form-control" value={this.state.name} onChange={this.changeName} required/>
                 </div>
                     
-                <button className="btn btn-success mt-5" onClick={this.saveType}>Añadir</button>
+                <button className="btn btn-warning mt-5" onClick={this.saveType}>Añadir</button>
                 <Link to="/">
-                    <button className="btn btn-danger mt-5" style={{marginLeft: "10px"}}>Cancelar</button>
+                    <button className="btn btn-dark mt-5" style={{marginLeft: "10px"}}>Cancelar</button>
                 </Link>
             </form>
           </div>

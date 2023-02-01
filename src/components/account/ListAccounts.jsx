@@ -43,10 +43,10 @@ export class ListAccounts extends Component {
         <div>
           <h2 className="text-center m-5">Cuentas de Servicios de Streaming</h2>
           <Link to="/create-account">
-            <button className="btn btn-success m-2">Crear Cuenta</button>
+            <button className="btn btn-warning m-2">Crear Cuenta</button>
           </Link>
           <Link to="/create-typeAccount">
-            <button className="btn btn-info m-2">
+            <button className="btn btn-dark m-2">
               Añadir Servicio Streaming
             </button>
           </Link>

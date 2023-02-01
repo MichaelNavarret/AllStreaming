@@ -57,8 +57,9 @@ export class AddAccount extends Component {
                     loginEmail: this.state.loginEmail,
                     password: this.state.password};
     AccountService.addAccount(account);
-    window.location.href = '/'; 
     
+    alert("Nueva cuenta agregada");
+    window.location.href = '/'; 
 
   }
 
@@ -113,9 +114,9 @@ export class AddAccount extends Component {
                     <input placeholder="Precio" type ="number" name="price" className="form-control" value={this.state.price} onChange={this.changePrice} required/>
                   </div>
                     
-                    <button className="btn btn-success mt-5" onClick={this.saveAccount}>Crear</button>
+                    <button className="btn btn-warning mt-5" onClick={this.saveAccount}>Crear</button>
                     <Link to="/">
-                        <button className="btn btn-danger mt-5" style={{marginLeft: "10px"}}>Cancel</button>
+                        <button className="btn btn-dark mt-5" style={{marginLeft: "10px"}}>Cancelar</button>
                     </Link>
                 </form>
               </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import AccountService from "../../services/AccountService";
-import { Link } from "react-router-dom";
 import NameTypeAccount from "../typeAccount/NameTypeAccount";
 import NameTypeState from "../typeState/NameTypeState";
 
@@ -22,7 +21,7 @@ export class TableListAccount extends Component {
 
     componentDidUpdate(prevProps) {
         
-        if(prevProps != this.props){
+        if(prevProps !== this.props){
             AccountService.filterTypeId(this.props.typeId, this.props.stateId).then((res) => {
                 this.setState({ accounts: res.data });
             });
@@ -37,7 +36,19 @@ export class TableListAccount extends Component {
         });
     }
 
+    cambiarColor(id){
+        if(id === 1){
+            return "table-active";
+        }
 
+        if(id === 2){
+            return "table-secondary"
+        }
+
+        if(id === 3){
+            return "table-danger"
+        }
+    }
 
     render() {
         if(this.state.accounts.length === 0){
@@ -50,8 +61,8 @@ export class TableListAccount extends Component {
             return (
                 <>
                 <table className="table table-striped  table-bordered table-hover">
-                <thead>
-                    <tr className="text-center table-light">
+                <thead  className=''>
+                    <tr className="text-center table-dark">
                     <th>Servicio</th>
                     <th>Fecha_Creacion</th>
                     <th>Estado</th>
@@ -65,9 +76,9 @@ export class TableListAccount extends Component {
                     <th></th>
                     </tr>
                 </thead>
-                <tbody>
                     {this.state.accounts.map((account) => (
-                    <tr key={account.id} className="text-center">
+                <tbody  key={account.id} id="fila" className={this.cambiarColor(account.stateId)}>
+                    <tr className="text-center">
                     <td>
                         <NameTypeAccount id={account.typeId} />
                     </td>
@@ -84,7 +95,7 @@ export class TableListAccount extends Component {
                     <td>
                         <button
                         onClick={() => redir(account.id)}
-                        className="btn btn-warning m-2"
+                        className="btn btn-info m-2"
                         >
                         Actualizar
                         </button>
@@ -98,8 +109,8 @@ export class TableListAccount extends Component {
                         </button>
                     </td>
                     </tr>
-                    ))}
                 </tbody>
+                    ))}
                 </table>
                 </>
             )
@@ -113,4 +124,3 @@ let redir = (id) => {
     localStorage.setItem("id", id);
     window.location.href = "/update-account";
   };
-  
