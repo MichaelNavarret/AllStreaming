@@ -29,20 +29,28 @@ export class TableListAccount extends Component {
       }
 
     deleteAccount(id) {
-        AccountService.deleteAccount(id).then((res) => {
-        this.setState({
-            accounts: this.state.accounts.filter((account) => account.id !== id),
-        });
-        });
+
+        var resultado = window.confirm('¿Seguro que desea eliminar esta cuenta?');
+        if (resultado === true) {
+            AccountService.deleteAccount(id).then((res) => {
+                this.setState({
+                    accounts: this.state.accounts.filter((account) => account.id !== id),
+                });
+                });
+        } else { 
+            window.alert('Cancelando...');
+        }
+
+        
     }
 
     cambiarColor(id){
         if(id === 1){
-            return "table-active";
+            return "table-light";
         }
 
         if(id === 2){
-            return "table-secondary"
+            return "table-success"
         }
 
         if(id === 3){
