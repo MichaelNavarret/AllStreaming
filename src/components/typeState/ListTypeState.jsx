@@ -30,4 +30,4 @@ export class ListTypeState extends Component {
     }
 }
 
-export default ListTypeState
+export default ListTypeState;

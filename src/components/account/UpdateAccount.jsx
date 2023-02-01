@@ -9,9 +9,9 @@ export class UpdateAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        typeId: 2,
+        typeId: 0,
         dateBorn: "",
-        stateId: 1,
+        stateId: 0,
         user: "",
         lastRent: "2010-01-01",
         countRent: 0,
@@ -53,10 +53,10 @@ export class UpdateAccount extends Component {
 
     let fechaHoy = this.state.accounts.lastRent;
     let increment = this.state.accounts.countRent;
-    let usuario = this.state.accounts.user;
+    let usuario = "";
     let price = this.state.accounts.price;
     let idType = this.state.accounts.typeId;
-    let idState = this.state.accounts.idState;
+    let idState = this.state.stateId;
     let pass = this.state.accounts.password;
     let email = this.state.accounts.loginEmail;
 
@@ -66,15 +66,20 @@ export class UpdateAccount extends Component {
         usuario = this.state.user;
         fechaHoy = formatFecha;
         console.log(fechaHoy);
-    }else{
-        usuario = "";
     }
+    console.log("Id Tipo: " + this.state.typeId);
+    console.log("Id original: " + this.state.accounts.typeId);
+    console.log("Id State: " + this.state.stateId);
+    console.log("Id original: " + this.state.accounts.stateId);
 
     if(this.state.price !== ""){price = this.state.price;}
 
     if(this.state.typeId !== 0){idType = this.state.typeId;}
     
-    if(this.state.idState !== 0){idState = this.state.stateId;}
+    if(this.state.stateId === 0){
+      idState = this.state.accounts.stateId;
+      usuario = this.state.accounts.user;
+    }
 
     if(this.state.password !== ""){pass = this.state.password}
 
@@ -89,9 +94,10 @@ export class UpdateAccount extends Component {
                     price: price,
                     password: pass,
                     loginEmail: email};
-    AccountService.updateAccount(localStorage.getItem("id"), account);
+    
     console.log(account);
-    window.location.href = '/';
+    AccountService.updateAccount(localStorage.getItem("id"), account);   
+    /*window.location.href = '/';  */
   }
 
 /*   changeLastRent=(e) =>{
@@ -138,7 +144,7 @@ export class UpdateAccount extends Component {
                     <label for="type">Tipo de cuenta: </label>
                     <br/>
                     <select name="typeAccount" id="typeAccount" onChange={this.changeTypeId} required>
-                        <option defaultValue={true} >Seleccione el tipo de cuenta</option>
+                        <option defaultValue={true} value="0">Seleccione el tipo de cuenta</option>
                         <ListTypeAccounts />
                     </select>
                   </div>
@@ -146,7 +152,7 @@ export class UpdateAccount extends Component {
                     <label for="type">Estado: </label>
                     <br/>
                     <select name="typeState" id="typeState" onChange={this.changeTypeStateId} required>
-                        <option defaultValue={true}>Seleccione el estado de la cuenta:</option>
+                        <option defaultValue={true} value="0">Seleccione el estado de la cuenta:</option>
                         <ListTypeState />
                     </select>
                   </div>

@@ -13,7 +13,7 @@ function App() {
         <HeaderComponent />
         <div className="container">
           <Routes>
-            <Route path="/" exact element={<ListAccounts />}></Route>
+            <Route path="/" exact element={<ListAccounts/>}></Route>
             <Route path="/create-account" exact element={<AddAccount />}></Route>
             <Route path="/update-account" exact element={<UpdateAccount />}></Route>
             <Route path="/create-typeAccount" exact element={<AddTypeAccount />}></Route>
