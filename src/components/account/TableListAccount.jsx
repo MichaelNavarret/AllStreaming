@@ -68,7 +68,7 @@ export class TableListAccount extends Component {
         }else{
             return (
                 <>
-                <table className="table table-striped  table-bordered table-hover">
+                <table className="table table-striped  table-bordered table-hover shadow p-3 mb-5">
                 <thead  className=''>
                     <tr className="text-center table-dark">
                     <th>Servicio</th>
